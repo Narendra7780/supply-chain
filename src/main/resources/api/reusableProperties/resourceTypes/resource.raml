@@ -1,0 +1,60 @@
+#%RAML 1.0 ResourceType
+get:
+        description: To retrieve the loan details of a customer
+      
+        responses:
+          200:
+            body:
+              application/json:
+                example:
+                  {
+                    "student_id": "18A41A0402",
+                    "course_amount": 20000
+                  }
+put:
+        description: To update the entire/complete loan information
+        body:
+          application/json:
+            example:
+                {
+                    "student_id": "18A41A0402",
+                    "course_amount": 20000
+                  }
+        responses:
+          200:
+            body:
+              application/json:
+                example:
+                  {
+                    "student_name": "Narendra",
+                    "message": "Loan info updated successfully"
+                  }
+patch:
+        description: To update a specific record of a Loan
+        body:
+          application/json:
+            example:
+              {
+                "course_amount": 500000
+              }
+        responses:
+          200:
+            body:
+              application/json:
+                example:
+                  {
+                    "student_name": "Narendra",
+                    "message": "Loan info updated successfully"
+                  }
+delete:
+        description: To close/remove the loan account
+
+        responses:
+          200:
+            body:
+              application/json:
+                example:
+                  {
+                    "student_name": "Narendra",
+                    "message": "Loan account closed successfully"
+                  }

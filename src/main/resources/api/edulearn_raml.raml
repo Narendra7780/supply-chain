@@ -1,0 +1,74 @@
+#%RAML 1.0
+title: edulearn_raml
+version: 1.0.0
+
+securitySchemes:
+  auth:
+   type: OAuth 2.0
+
+traits:
+    requestQuery: !include /reusableProperties/traits/quaryParam.raml
+    requestHeader: !include /reusableProperties/traits/requestHeader.raml
+
+types:
+   inputSchema: !include /reusableProperties/types/input.raml
+   outputSchema: !include /reusableProperties/types/output.raml
+   errorSchema: !include /reusableProperties/types/error.raml
+   serverShema: !include /reusableProperties/types/server.raml
+
+resourceTypes:
+   resourse: !include /reusableProperties/resourceTypes/resource.raml
+
+/course:
+  securedBy:
+    - auth
+  is:
+    - requestHeader
+  description: To create course Accounts for students
+  post:
+    body:
+      application/json:
+        type: inputSchema
+    responses:
+      201:
+        body:
+          application/json:
+            type: outputSchema
+      400:
+        body:
+          application/json:
+            type: errorSchema
+      500:
+        body:
+          application/json:
+            type: serverShema
+  
+  /{course_type}:
+    uriParameters:
+      course_type:
+        type: string
+        enum:
+          - mulesoft
+          - sql
+          - java
+          - phyton
+    get:
+       description: To fetch/retrieve the loan details belonging to a specific loan type of a customer      
+       is:
+        - requestQuery
+       responses:
+         200:
+          body:
+            application/json:
+              type: !include reusableProperties/types/example.raml
+              
+    /{course_id}:
+      uriParameters:
+        course_id:
+          type: string
+      type: resourse
+          
+
+    
+
+  
